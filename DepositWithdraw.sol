@@ -10,4 +10,9 @@ contract Deposit{
         FromAddressList.push(msg.sender);
         FromAddrAmtMap[msg.sender] += msg.value;
     }
+
+    function withdrawCrypto(uint256 _CryptoAmount) public {
+        (bool callSuccess, ) = payable(msg.sender).call{value: _CryptoAmount}("");
+        require(callSuccess, "My Call failed");
+    }
 }
